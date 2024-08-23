@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    cout<<"Enter n : ";
+    double n;
+    cin>>n;
+    vector<double> x(n);
+    vector<double> y(n);
+    for(int i=0;i<n;i++){
+        cin>>x[i];
+    }
+    for(int i=0;i<n;i++){
+        cin>>y[i];
+    }
+    double xsum=0,ysum=0,x2sum=0,xysum=0;
+    for(int i=0;i<n;i++){
+        xsum +=x[i];
+        ysum +=y[i];
+        x2sum +=pow(x[i],2);
+        xysum +=x[i]*y[i];
+    }
+    double a=(n*xysum-xsum*ysum)/(n*x2sum-xsum*xsum);
+    double b=(1/n)*(ysum-a*xsum);
+    cout<<"y="<<a<<"x +"<<b;
+    
+
+}
+
+Enter n : 5
+5 10 15 20 25
+16 19 23 26 30
+y=0.7x +12.3
