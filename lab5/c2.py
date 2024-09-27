@@ -1,0 +1,49 @@
+import matplotlib.pyplot as plt
+import math
+import numpy as np
+ 
+    
+x=[12.5 , 5.0 , 3.0 , 5.0 , 6.5, 6.0,4.0 ,7.0, 5.5, 4.0]
+y=[10, 26 , 41 ,29 , 27, 19, 18, 20, 28, 33]
+
+n=len(x)
+Sum_X=0
+Sum_y=0
+Sum_xy=0
+Sum_x2=0
+Sum_y2=0
+i=0
+n=len(x)
+for i in range(n):
+   Sum_X=Sum_X+x[i]
+   Sum_y=Sum_y+y[i]
+   Sum_xy=Sum_xy+x[i]*y[i]
+   Sum_x2=Sum_x2+x[i]*x[i]
+   Sum_y2=Sum_y2+y[i]*y[i]
+mux=Sum_X/n
+muy=Sum_y/n   
+   
+Lxy= (float)(Sum_xy-(1/n)*(Sum_X)*(Sum_y))  
+Lxx= (float)(Sum_x2-(1/n)*(Sum_X)*(Sum_X))
+Lyy= (float)(Sum_y2-(1/n)*(Sum_y)*(Sum_y))
+crr=(float)(Lxy)/(float)((math.sqrt(Lxx*Lyy)))
+sx=math.sqrt(Lxx)
+sy=math.sqrt(Lyy)
+X= np.linspace(-5,5,100)
+sx=math.sqrt(Lxx)
+sy=math.sqrt(Lyy)
+print("sx=",sx)
+print("sy=",sy)
+print("Ux =",mux)
+print("Uy=",muy)
+X1= np.linspace(-5,5,100)
+t=crr*(sy/sx)
+t2=(sy/(sx*crr))
+Y1=(t)*X+muy-t*mux
+Y2=(t2)*X+muy-t2*mux
+print("Y =",t,"*X +",muy-(t)*mux)
+print("X =",crr*(sx/sy),"*Y +",mux-(crr*(sx/sy))*muy)
+plt.plot(X1,Y1 ,'-r',label='y')
+plt.plot(X1,Y2 ,'-b',label='y')
+
+plt.show()
