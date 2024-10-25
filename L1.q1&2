@@ -2,12 +2,17 @@
 data = [38, 40, 47, 44, 46, 43, 49, 53]
 n = len(data)
 
-# (a) Calculate Mean
-mean = sum(data) / n
+# (a) Calculate Mean using a for loop
+total_sum = 0
+for value in data:
+    total_sum += value
+mean = total_sum / n
 print(f"Mean: {mean}")
 
-# (b) Calculate Variance and Standard Deviation
-sum_squared_diff = sum((x - mean) ** 2 for x in data)
+# (b) Calculate Variance using a for loop
+sum_squared_diff = 0
+for value in data:
+    sum_squared_diff += (value - mean) ** 2
 variance = sum_squared_diff / n  # Population variance
 std_dev = variance ** 0.5  # Standard deviation
 print(f"Variance: {variance}")
@@ -21,11 +26,12 @@ print(f"Coefficient of Variation: {cv:.2f}%")
 # Student A: marks = 460, std_dev = 4.6
 # Student B: marks = 480, std_dev = 2.4
 
+# Calculate CV for Student A
 mean_A, std_dev_A = 460, 4.6
-mean_B, std_dev_B = 480, 2.4
-
-# Calculate CV for both students
 cv_A = (std_dev_A / mean_A) * 100
+
+# Calculate CV for Student B
+mean_B, std_dev_B = 480, 2.4
 cv_B = (std_dev_B / mean_B) * 100
 
 print(f"CV of Student A: {cv_A:.2f}%")
@@ -36,3 +42,4 @@ if cv_A < cv_B:
     print("Student A is more consistent.")
 else:
     print("Student B is more consistent.")
+
