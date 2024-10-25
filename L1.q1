@@ -1,0 +1,38 @@
+# Problem 1: Mean, Variance, and Coefficient of Variation
+data = [38, 40, 47, 44, 46, 43, 49, 53]
+n = len(data)
+
+# (a) Calculate Mean
+mean = sum(data) / n
+print(f"Mean: {mean}")
+
+# (b) Calculate Variance and Standard Deviation
+sum_squared_diff = sum((x - mean) ** 2 for x in data)
+variance = sum_squared_diff / n  # Population variance
+std_dev = variance ** 0.5  # Standard deviation
+print(f"Variance: {variance}")
+print(f"Standard Deviation: {std_dev}")
+
+# (c) Calculate Coefficient of Variation (CV)
+cv = (std_dev / mean) * 100
+print(f"Coefficient of Variation: {cv:.2f}%")
+
+# Problem 2: Consistency Comparison (Coefficient of Variation)
+# Student A: marks = 460, std_dev = 4.6
+# Student B: marks = 480, std_dev = 2.4
+
+mean_A, std_dev_A = 460, 4.6
+mean_B, std_dev_B = 480, 2.4
+
+# Calculate CV for both students
+cv_A = (std_dev_A / mean_A) * 100
+cv_B = (std_dev_B / mean_B) * 100
+
+print(f"CV of Student A: {cv_A:.2f}%")
+print(f"CV of Student B: {cv_B:.2f}%")
+
+# Determine who is more consistent
+if cv_A < cv_B:
+    print("Student A is more consistent.")
+else:
+    print("Student B is more consistent.")
