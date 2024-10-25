@@ -1,0 +1,53 @@
+import numpy as np
+import scipy.stats as stats
+
+def calculate_confidence_intervals(data, confidence_level=0.95):
+    """Calculate 95% confidence intervals for variance and standard deviation."""
+    n = len(data)
+    sample_variance = np.var(data, ddof=1)  # Unbiased sample variance
+
+    # Chi-square critical values
+    alpha = 1 - confidence_level
+    chi2_lower = stats.chi2.ppf(alpha / 2, n - 1)
+    chi2_upper = stats.chi2.ppf(1 - alpha / 2, n - 1)
+
+    # Confidence interval for variance
+    variance_lower = (n - 1) * sample_variance / chi2_upper
+    variance_upper = (n - 1) * sample_variance / chi2_lower
+
+    # Confidence interval for standard deviation
+    std_lower = np.sqrt(variance_lower)
+    std_upper = np.sqrt(variance_upper)
+
+    return sample_variance, (variance_lower, variance_upper), (std_lower, std_upper)
+
+def display_results(data, dataset_name):
+    """Display results for a given dataset."""
+    variance, var_interval, std_interval = calculate_confidence_intervals(data)
+    print(f"\nResults for {dataset_name}:")
+    print(f"Sample Variance: {variance:.4f}")
+    print(f"95% Confidence Interval for Variance: [{var_interval[0]:.4f}, {var_interval[1]:.4f}]")
+    print(f"95% Confidence Interval for Standard Deviation: [{std_interval[0]:.4f}, {std_interval[1]:.4f}]")
+
+def main():
+    """Main function to calculate confidence intervals for both datasets."""
+
+    # Data for Question 1 (Steel Ball Bearings' Diameters)
+    data1 = [
+        2.02, 1.94, 2.09, 1.95, 1.98, 2.00, 2.03, 2.04, 2.08, 2.07,
+        1.99, 1.96, 1.95, 1.99, 1.99, 2.03, 2.05, 2.01, 2.02, 2.03
+    ]
+
+    # Data for Question 2 (Wooden Component Lengths in mm)
+    data2 = [
+        581, 580, 581, 577, 580, 581, 577, 579, 579, 578,
+        581, 583, 577, 578, 582, 581, 582, 580, 582, 579
+    ]
+
+    # Display results for both datasets
+    display_results(data1, "Question 1 (Steel Ball Bearings)")
+    display_results(data2, "Question 2 (Wooden Components)")
+
+# Execute the main function
+if __name__ == "__main__":
+    main()
