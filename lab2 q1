@@ -27,6 +27,34 @@ int main()
 
 }
 
+
+# Given data for Question 1
+x = [5, 10, 15, 20, 25]
+y = [16, 19, 23, 26, 30]
+
+# Number of data points
+n = len(x)
+
+# Initialize sums
+sum_x = 0
+sum_y = 0
+sum_xy = 0
+sum_x2 = 0
+
+# Loop through the data to calculate sums
+for i in range(n):
+    sum_x += x[i]
+    sum_y += y[i]
+    sum_xy += x[i] * y[i]
+    sum_x2 += x[i] ** 2
+
+# Calculating slope (b) and intercept (a)
+b = (n * sum_xy - sum_x * sum_y) / (n * sum_x2 - sum_x ** 2)
+a = (sum_y - b * sum_x) / n
+
+print(f"The equation of the line is: y = {a:.2f} + {b:.2f}x")
+
+
 Enter n : 5
 5 10 15 20 25
 16 19 23 26 30
